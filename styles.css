@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #333;
+}
+
+.image-carousel {
+  position: relative; /* Establishes a new context for absolutely positioned children */
+  height: 100vh; /* Sets the height to fill the entire viewport */
+  width: 100%; /* Sets the width to fill the parent container */
+}
+
+.image-carousel img {
+  position: absolute; /* Positions each image absolutely within .image-carousel */
+  top: 0; /* Aligns each image to the top of .image-carousel */
+  left: 0; /* Aligns each image to the left of .image-carousel */
+  width: 100%; /* Ensures each image fills the width of .image-carousel */
+  height: 100%; /* Ensures each image fills the height of .image-carousel */
+  object-fit: cover; /* Ensures each image scales proportionally to fill .image-carousel */
+  transition: opacity 0.5s ease-in-out;  /* Cleaner transitions */
+  opacity: 0;  /* Images default to hidden and are revealed by class changing */
+}
+
+.image-carousel img.active {
+  opacity: 1;  /* Fully visible */
+}
+
+.carousel-controls {
+  position: fixed; /* Positions the controls at a fixed position on the page */
+  bottom: 5%; /* Aligns the controls near the bottom of the page */
+  width: 100%; /* Ensures the controls span the full width of the page */
+  height: 6em; /* Sets the height of the controls */
+  z-index: 1; /* Positions the controls above the images */
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+/* previous/next control arrows */
+.arrow {
+  width: 6em;
+  fill: #666;
+  opacity: 0.75;
+}
+
+.arrow:hover {
+  fill: #ccc;
+}
+
+.carousel-controls .indicator-tray {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.indicator {
+  display: inline-block; /* Ensures the indicators are on the same line */
+  height: 6em; /* Sets the height of the indicators */
+  width: 6em; /* Sets the width of the indicators */
+  border-radius: 50%; /* Ensures the indicators are circular */
+  background-color: #666; /* Sets the color of the indicators */
+  margin: 0 0.25em; /* Adds a small margin between the indicators */
+  transition: opacity 0.5s ease-in-out; /* Cleaner transitions */
+  opacity: 0.5; /* Indicators default to semi-transparent and are revealed by class changing */
+}
+
+.indicator.active {
+  opacity: 0.75; /* indicate active image with opacity */
+}
+
+.indicator:not(.active):hover {
+  /* indicate clickable with highlight */
+  box-shadow: 0 0 2em 1em #ccc inset;
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the indicators */
+}
