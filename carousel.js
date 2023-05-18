@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 const images = [
   // array of image URLs
   "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe",
@@ -6,6 +7,18 @@ const images = [
   "https://images.unsplash.com/photo-1684066344810-efce4ebacab7",
 ];
 let currentImage = 0; // index of the currently displayed image in the images array
+
+let timer = null;
+
+function resetTimer() {
+  if (timer) {
+    clearTimeout(timer); // clear the existing timer
+  }
+  // Set a new timer
+  timer = setTimeout(() => {
+    updateImageTo((currentImage + 1) % images.length);
+  }, 5000); // 5000ms = 5s
+}
 
 function updateImageTo(index) {
   const previousImage = currentImage;
@@ -34,6 +47,8 @@ function updateImageTo(index) {
       })`
     )
     .classList.add("active");
+
+  resetTimer(); // reset the timer whenever the image is updated
 }
 
 /* Function to handle both previous and next  */
@@ -92,4 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
   indicators.forEach((indicator, index) => {
     indicator.addEventListener("click", () => updateImageTo(index));
   });
+
+  resetTimer();
 });
